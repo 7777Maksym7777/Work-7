@@ -1,0 +1,105 @@
+/* =========================================================
+   DESIGN TOKENS — три рівні: Primitive / Semantic / Component
+   ========================================================= */
+:root {
+  /* Primitive Tokens */
+  --blue-50: #eff6ff;
+  --blue-100: #dbeafe;
+  --blue-600: #2563eb;
+  --blue-700: #1d4ed8;
+  --slate-0: #ffffff;
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-700: #334155;
+  --slate-900: #0f172a;
+  --green-100: #dcfce7;
+  --green-700: #15803d;
+  --amber-100: #fef3c7;
+  --amber-700: #b45309;
+  --red-100: #fee2e2;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, .06);
+  --shadow-md: 0 12px 30px rgba(15, 23, 42, .08);
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 20px;
+  --font-xl: 28px;
+  --font-2xl: 36px;
+  --line-normal: 1.5;
+
+  /* Semantic Tokens — Light theme */
+  --color-primary: var(--blue-600);
+  --color-primary-hover: var(--blue-700);
+  --color-text: var(--slate-900);
+  --color-text-muted: var(--slate-500);
+  --color-surface: var(--slate-0);
+  --color-surface-soft: var(--slate-50);
+  --color-page: var(--slate-50);
+  --color-border: var(--slate-200);
+  --color-success: var(--green-700);
+  --color-success-soft: var(--green-100);
+  --color-warning: var(--amber-700);
+  --color-warning-soft: var(--amber-100);
+  --color-danger: var(--red-600);
+  --color-danger-hover: var(--red-700);
+  --color-danger-soft: var(--red-100);
+  --color-focus: var(--blue-600);
+
+  /* Component Tokens */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-hover: var(--color-primary-hover);
+  --button-primary-text: var(--slate-0);
+  --button-secondary-bg: var(--color-surface);
+  --button-secondary-text: var(--color-text);
+  --button-danger-bg: var(--color-danger);
+  --button-danger-text: var(--slate-0);
+  --input-bg: var(--color-surface);
+  --input-border: var(--color-border);
+  --input-text: var(--color-text);
+  --input-focus: var(--color-focus);
+  --card-bg: var(--color-surface);
+  --card-border: var(--color-border);
+  --card-radius: var(--radius-lg);
+}
+
+/* Dark theme overrides semantic tokens only */
+[data-theme="dark"] {
+  --color-primary: #7aa7ff;
+  --color-primary-hover: #9bbcff;
+  --color-text: #e5edf8;
+  --color-text-muted: #a3b2c7;
+  --color-surface: #182337;
+  --color-surface-soft: #202e44;
+  --color-page: #101a2b;
+  --color-border: #34445d;
+  --color-success: #86efac;
+  --color-success-soft: #173b32;
+  --color-warning: #fcd34d;
+  --color-warning-soft: #493b1d;
+  --color-danger: #f87171;
+  --color-danger-hover: #fca5a5;
+  --color-danger-soft: #48272d;
+  --color-focus: #93b4ff;
+  --button-primary-text: #101a2b;
+  --button-secondary-bg: var(--color-surface-soft);
+  --button-danger-text: #101a2b;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, .18);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, .22);
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Демонстраційний вебзастосунок для практичної роботи №6: Screen States та дизайн-токени.">
+  <title>Практична робота №6 — TaskFlow</title>
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+  <script src="tests.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="TaskFlow — головна">
+      <span class="brand-mark">T</span><span>TaskFlow</span>
+    </a>
+    <nav class="header-actions" aria-label="Головні дії">
+      <button class="button button-secondary button-small" id="themeToggle" type="button">Темна тема</button>
+      <a class="text-link" href="#design-system">Дизайн-система</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Панель керування</p>
+        <h1>Мої завдання</h1>
+        <p class="intro-copy">Організовуйте справи, відстежуйте прогрес і керуйте своїм часом.</p>
+      </div>
+      <button class="button button-primary" id="addTask" type="button">＋ Додати завдання</button>
+    </section>
+
+    <section class="toolbar panel" aria-label="Пошук і керування завданнями">
+      <div class="field search-field">
+        <label for="searchInput">Пошук завдань</label>
+        <input id="searchInput" type="search" placeholder="Наприклад, підготувати звіт..." autocomplete="off">
+      </div>
+      <div class="toolbar-actions">
+        <button class="button button-secondary" id="refreshButton" type="button">↻ Оновити</button>
+        <button class="button button-danger button-outline" id="clearButton" type="button">Очистити список</button>
+      </div>
+    </section>
+
+    <section class="state-lab panel" aria-labelledby="stateLabTitle">
+      <div class="state-lab-copy">
+        <h2 id="stateLabTitle">Перемикач станів</h2>
+        <p>Панель тестування для перевірки всіх станів екрана.</p>
+      </div>
+      <div class="state-buttons" role="group" aria-label="Тестування станів">
+        <button class="button button-secondary button-small" data-show-state="content" type="button">Дані</button>
+        <button class="button button-secondary button-small" data-show-state="loading" type="button">Завантаження</button>
+        <button class="button button-secondary button-small" data-show-state="empty" type="button">Порожній</button>
+        <button class="button button-secondary button-small" data-show-state="error" type="button">Помилка</button>
+      </div>
+    </section>
+
+    <section class="task-section" aria-live="polite" aria-atomic="false">
+      <div class="section-heading">
+        <div>
+          <h2>Список завдань</h2>
+          <p id="resultCount" class="muted">Завантаження даних…</p>
+        </div>
+      </div>
+
+      <div class="screen-state" data-state="loading">
+        <div class="skeleton-card"><span class="skeleton-line wide"></span><span class="skeleton-line medium"></span><span class="skeleton-line short"></span></div>
+        <div class="skeleton-card"><span class="skeleton-line wide"></span><span class="skeleton-line medium"></span><span class="skeleton-line short"></span></div>
+        <div class="skeleton-card"><span class="skeleton-line wide"></span><span class="skeleton-line medium"></span><span class="skeleton-line short"></span></div>
+      </div>
+
+      <div class="screen-state task-grid is-hidden" data-state="content" id="taskList"></div>
+
+      <div class="screen-state empty-state is-hidden" data-state="empty">
+        <div class="empty-illustration" aria-hidden="true">
+          <svg viewBox="0 0 120 120" role="img" aria-label="Порожній список">
+            <rect x="24" y="19" width="72" height="86" rx="12" fill="none" stroke="currentColor" stroke-width="4"/>
+            <path d="M42 43h36M42 59h26M42 75h18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="88" cy="87" r="17" fill="var(--color-primary)" stroke="var(--color-surface)" stroke-width="4"/>
+            <path d="M88 79v16M80 87h16" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 id="emptyTitle">Поки що немає завдань</h3>
+        <p id="emptyDescription">Додайте перше завдання або змініть пошуковий запит.</p>
+        <button class="button button-primary" id="emptyAction" type="button">Відновити список</button>
+      </div>
+
+      <div class="screen-state error-state is-hidden" data-state="error">
+        <div class="error-symbol" aria-hidden="true">!</div>
+        <h3>Не вдалося завантажити дані</h3>
+        <p>Сталася демонстраційна помилка запиту. Код помилки: <strong>ERR_DEMO_503</strong>.</p>
+        <button class="button button-primary" id="retryButton" type="button">Повторити спробу</button>
+      </div>
+    </section>
+
+    <section class="design-system-section" id="design-system">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">UI Kit Showcase</p>
+          <h2>Бібліотека компонентів</h2>
+          <p class="muted">Приклади компонентів і їхніх інтерактивних станів.</p>
+        </div>
+      </div>
+
+      <div class="showcase-grid">
+        <article class="showcase-card">
+          <h3>Кнопки</h3>
+          <p class="muted">Primary, Secondary та Danger</p>
+          <div class="showcase-row">
+            <button class="button button-primary" type="button">Primary</button>
+            <button class="button button-secondary" type="button">Secondary</button>
+            <button class="button button-danger" type="button">Danger</button>
+          </div>
+          <div class="showcase-row">
+            <button class="button button-primary" type="button" disabled>Disabled</button>
+            <button class="button button-secondary button-outline" type="button">Наведіть / Focus</button>
+          </div>
+        </article>
+
+        <article class="showcase-card">
+          <h3>Поля введення</h3>
+          <div class="field">
+            <label for="demoEmail">Електронна пошта</label>
+            <input id="demoEmail" type="email" placeholder="name@example.com">
+          </div>
+          <div class="field">
+            <label for="demoError">Поле з помилкою</label>
+            <input id="demoError" class="input-error" type="text" value="Некоректне значення" aria-invalid="true" aria-describedby="demoErrorText">
+            <span class="field-error" id="demoErrorText">Перевірте введені дані.</span>
+          </div>
+        </article>
+
+        <article class="showcase-card">
+          <h3>Картка контенту</h3>
+          <div class="mini-content-card">
+            <span class="status-pill status-success">Виконано</span>
+            <h4>Підготовка інтерфейсу</h4>
+            <p class="muted">Компонент картки використовує семантичні токени.</p>
+            <div class="progress-track"><span></span></div>
+          </div>
+        </article>
+      </div>
+      <p class="token-note">Тема перемикається у верхній панелі. Змінюються лише семантичні токени, а компоненти зберігають ті самі класи.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Практична робота №6</span><span>Screen States · Design Tokens · Vanilla JavaScript</span>
+  </footer>
+
+  <dialog class="task-dialog" id="taskDialog" aria-labelledby="dialogTitle">
+    <form id="taskForm" method="dialog">
+      <div class="dialog-heading">
+        <h2 id="dialogTitle">Нове завдання</h2>
+        <button class="icon-button" id="closeDialog" type="button" aria-label="Закрити">×</button>
+      </div>
+      <div class="field">
+        <label for="taskTitle">Назва завдання</label>
+        <input id="taskTitle" name="taskTitle" type="text" maxlength="80" required placeholder="Введіть назву">
+      </div>
+      <div class="field">
+        <label for="taskCategory">Категорія</label>
+        <select id="taskCategory" name="taskCategory">
+          <option>Навчання</option><option>Робота</option><option>Особисте</option>
+        </select>
+      </div>
+      <div class="dialog-actions">
+        <button class="button button-secondary" id="cancelDialog" type="button">Скасувати</button>
+        <button class="button button-primary" type="submit">Додати</button>
+      </div>
+    </form>
+  </dialog>
+</body>
+</html>
